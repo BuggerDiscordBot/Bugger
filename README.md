@@ -12,7 +12,7 @@ Make nice and possibly freindly discord bot to train our programming skills and 
 Licenced by the MIT License ==> check out [LICENCE](LICENSE) section for more info.
 ### Dreaming about using Bugger?!
 We just love fulfill kids dreams!
-Just click [that link] (https://dodek69.github.io/) and have fun!
+Just click [that link](https://dodek69.github.io/) and have your fun!
 ### Using Bugger privately
 To recive all needed files, enviroment and knowledge contact us!
 ### Contribution
