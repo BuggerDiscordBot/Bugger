@@ -1,0 +1,27 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+skip_tags: true
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+build_script:
+  - dotnet build -c Release
+test_script:
+- ps: >-
+    dotnet test       
+    
+    &('dotnet') ('test', '/p:CollectCoverage=true', '/p:"Include=[Bugger]*"',  '/p:CoverletOutputFormat=opencover')
+
+    nuget install OpenCover -OutputDirectory packages -Version 4.6.519
+    
+    dotnet tool install coveralls.net --version 1.0.0 --tool-path tools
+        
+    $coveralls = ".\tools\csmacnz.coveralls.exe"
+    
+    if (Get-Variable 'COVERALLS_REPO_TOKEN' -Scope Global -ErrorAction 'Ignore') {
+    
+    & $coveralls --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
+    
+    }
