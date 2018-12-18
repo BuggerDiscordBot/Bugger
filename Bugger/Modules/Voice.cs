@@ -10,9 +10,9 @@ namespace Bugger.Modules
     {
         const int maxTimeInMinutes = 21600000;
 
-        [Command("TKG", RunMode = RunMode.Async)]
+        [Command("TymczasowyKanałGłosowy", RunMode = RunMode.Async)]
         [Alias("TKG", "TKGłosowy", "TKanałG", "TKanałGłosowy", "TymczasowyKG", "TymczasowyKGłosowy", "TymczasowyKanałG", "Tymczasowy", "TymczasowyGłosowy", "TymczasowyKanalGlosowy", "TymczasowyGlosowy", "TVCH", "TVChannel", "TVoiceCH", "TVoiceChannel", "TemporaryVCH", "TemporaryVChannel", "TemporaryVoiceCH", "Temporary", "TemporaryVoice", "TemporaryVCH", "TVoice", "TemporaryVoiceChannel")]
-        [Summary("Pozwala tworzyć użytkownikom ich własne, tymczasowe kanały głosowe, które po czasie automatycznie znikają.")]
+        [Summary("Pozwala tworzyć użytkownikom ich własne, tymczasowe kanały głosowe, które po czasie automatycznie znikają. **[VIP FEATURE]**")]
         [RequireBotPermission(GuildPermission.ManageChannels)]
         [Cooldown(900, false)]
         public async Task CreateTemporaryVoiceChannel(int lifetimeInMinutes = 0)

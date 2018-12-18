@@ -46,7 +46,11 @@ namespace Bugger.Handlers
             if (msg.HasMentionPrefix(_client.CurrentUser, ref argPos) || CheckPrefix(ref argPos, context))
             {
                 var cmdSearchResult = _cmdService.Search(context, argPos);
-                if (!cmdSearchResult.IsSuccess) { return; }
+                if (!cmdSearchResult.IsSuccess)
+                {
+                    await context.Channel.SendMessageAsync("Nie czaję... :sweat_smile: Sprawdź składnię i upewnij się, że taka komenda napewno istnieje :kissing_heart::stuck_out_tongue_closed_eyes:");
+                    return;
+                }
                 
                 context.RegisterCommandUsage();
 

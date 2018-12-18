@@ -66,6 +66,7 @@ namespace Bugger.Modules
         public async Task Mute(SocketGuildUser Użytkownik)
         {
             await Context.Guild.GetUser(Użytkownik.Id).ModifyAsync(x => x.Mute = true);
+
             var muteRole = await GetMuteRole(Użytkownik.Guild);
             if (!Użytkownik.Roles.Any(r => r.Id == muteRole.Id))
                 await Użytkownik.AddRoleAsync(muteRole).ConfigureAwait(false);
@@ -201,18 +202,13 @@ namespace Bugger.Modules
         [RequireUserPermission(GuildPermission.Administrator)]
         public async Task RainbowRole(int Szybkość, string NazwaRoli)
         {
-            /*if (Context.Message.Author.Id != 356147668231258113)
-            {
-                Console.WriteLine(Context.Message.Timestamp + " | " + Context.Message.Author + " | " + Context.Guild + " ===> " + Context.Channel + " | Proźba o RainbowRole dla roli: " + NazwaRoli + " z szybkością " + Szybkość);
-                Context.Channel.SendMessageAsync("Trwa weryfikacja...");
-            }*/
-
-            var Role = Context.Guild.Roles.Where(x => x.Name == NazwaRoli).FirstOrDefault() as SocketRole;
-            int r = 255, g = 0, b = 0;
             if (Context.Message.Author.Id == 356147668231258113)
             {
                 var embed = EmbedHandler.CreateEmbed("Sprawiłem, że rola o nazwie " + NazwaRoli + " ma gejowy kolor zmieniający się z szybkością " + Szybkość + "!", EmbedHandler.EmbedMessageType.Success);
                 await Context.Channel.SendMessageAsync("", false, embed);
+
+                var Role = Context.Guild.Roles.Where(x => x.Name == NazwaRoli).FirstOrDefault() as SocketRole;
+                int r = 255, g = 0, b = 0;
 
                 for (; ; )
                 {
@@ -396,9 +392,9 @@ namespace Bugger.Modules
         }
         public async Task<IRole> GetMuteRole(IGuild guild)
         {
-            const string defaultMuteRoleName = "wyciszony";
+            const string defaultMuteRoleName = "uciszony";
 
-            var muteRoleName = "wyciszony";
+            var muteRoleName = "uciszony";
 
             var muteRole = guild.Roles.FirstOrDefault(r => r.Name == muteRoleName);
 

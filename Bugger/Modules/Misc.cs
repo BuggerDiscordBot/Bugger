@@ -13,6 +13,7 @@ using Bugger.Features.Lists;
 using Discord.WebSocket;
 using Discord.Rest;
 using System.IO;
+using Bugger.Configuration;
 
 namespace Bugger.Modules
 {
@@ -28,7 +29,7 @@ namespace Bugger.Modules
             _listManager = listManager;
         }
 
-        [Cooldown(15, true)]
+        [Cooldown(5, true)]
         [Command("Pomoc"), Alias("P", "H", "Pomocy", "Pomóż", "Pomoz", "Help"), Remarks("Pokażę dokładniejsze informacje na temat konkretnej komendy. Jeśli jej nie sprecyzujesz, wyślę Ci **DM**esa ze wszystkimi komendami.")]
         public async Task Help()
         {
@@ -40,8 +41,8 @@ namespace Bugger.Modules
             var builder = new EmbedBuilder()
             {
                 Title = "          :sos:  **Pomoc**  :sos:",
-                Description = $"Masz tutaj wszystkie moje komendy. Pamiętaj, że większość komend ma też łatwiejsze skróty i nazwy zastępcze.\nNp. dwie poniższe komendy są równoznaczne. ```<prefix>pseudonim <NazwaUżytkownika>```=```<prefix>ps <NazwaUżytkownika>```\n" +
-                $"Jeśli chcesz uzyskać więcej informacji o danej komendzie (np. właśnie o jej zamiennikach, parametrach czy jeśli są wymaganiach) napisz: ```<prefix>pomoc <NazwaKomendy>```\n",
+                Description = $"Pamiętaj, że większość komend ma też łatwiejsze skróty, inne nazwy i odpowiedniki anglojęzyczne.\nNp. dwie poniższe komendy są równoznaczne: ```<prefix>pseudonim <NazwaUżytkownika>```=```<prefix>ps <NazwaUżytkownika>```\n" +
+                $"Jeśli chcesz uzyskać więcej informacji o danej komendzie [np. właśnie o jej zamiennikach, parametrach czy (jeśli są) wymaganiach] napisz: ```<prefix>pomoc <NazwaKomendy>```\nJeśli nie chcesz to nie musisz używać znaków diakrytycznych (\"ł\", \"ś\", \"ć\" itd.) oraz przestrzegać wielkości liter.\nPoniżej wybrałem komendy na użycie których masz uprawnienie na tym serwerze.",
                 Color = new Color(0, 255, 0)
             };
 
@@ -126,7 +127,7 @@ namespace Bugger.Modules
                 "***__~~DODEK~~__*** - też cośtam klikał. A tak to sumie to tak jak poprzednik, tylko, że on umie programować XD. Dobrze zastępuje komputer we nasze wspólne chłodne noce przed Visual Studio :joy::sweat_smile::cry::sob:\n" +
                 "Dodatkowe źródła: Autor publicznego \"Community-Discord-BOT\" (na którego strukturach się uczyliśmy i wzorowaliśmy) i tutoriala do implementacji języka C# dla discorda - Petrspelos\n" +
                 "Po dokończeniu tego projektu, który mamy zamiar aktywnie wspierać jeszcze koło miesiąc planujemy coś coś... a z resztą zobaczycie!!!\nLove & Care,  **ADz Tim**")
-                .WithFooter("Więcej info? Też chcesz bota? A może chcesz nas wspomóc? (xD) Pisz na priv!")
+                .WithFooter("Więcej info? Też chcesz bota? A może chcesz nas wspomóc? (xD) Pisz tu: buggerdiscordbot@gmail.com!")
                 .WithColor(0, 255, 0);
 
            var contributions = await GitHub.Contributions("Dodek69", "Bugger");
@@ -153,7 +154,7 @@ namespace Bugger.Modules
             EmbedBuilder builder = new EmbedBuilder();
             builder.Color = new Color(114, 137, 218);
             //builder.AddField("Moja Wersja... :thinking: ", $"Tu jest napisane że: `{Global.version}` lol\n_Mogliby mnie raz za czas chociaż spaczować :unamused:");
-            builder.AddField("Moja Wersja... :thinking: ", $"Tu jest napisane że: `Public Alpha - 0.9.9.9` lol\n_Mogliby mnie raz za czas chociaż spaczować_ :unamused:");
+            builder.AddField("Moja Wersja... :thinking: ", $"Tu jest napisane że: `Public Beta - 0.0.9.9` lol\n_Mogliby mnie raz za czas chociaż spaczować_ :unamused:");
             await ReplyAsync("", false, builder.Build());
         }
 
@@ -234,7 +235,7 @@ namespace Bugger.Modules
             var embed = new EmbedBuilder();
             embed.WithTitle("Zgłaszanie buga __**Bug**__gera");
             embed.WithDescription(@"Jeśli znalazłeś błąd, albo poprostu chcesz nam pomóc w ulepszaniu **tego projektu**, powiadom nas tworząc problem na **GitHubie** :point_down:" + "\n\n" +
-            "**[ 🢂 :fire: TUTAJ :fire:  🢀 ](https://github.com/Dodek69/Community-Discord-BOT/issues/new/choose)**" + "\n");
+            "**[ 🢂 :fire: TUTAJ :fire:  🢀 ](https://github.com/BuggerDiscordBot/Bugger/issues/new?template=bug_report.md)**" + "\n");
             embed.WithImageUrl("https://c8.alamy.com/comp/X3GBDF/woman-inside-elderly-woman-computer-housework-laptop-success-ebay-notebook-surprises-surprise-mobile-X3GBDF.jpg");
             embed.WithFooter("W przypadku pilnych wiadomości pisz bezpośrednio do nas:\n<p>z <treść>");
             embed.WithColor(255, 0, 0);
@@ -268,7 +269,7 @@ namespace Bugger.Modules
 
             var embed = new EmbedBuilder();
 
-            embed.WithTitle("Wysłałeś wiadomość do mojego pana! :punch::boom:");
+            embed.WithTitle("Powiadomiłeś twórców!!! :punch::boom:");
             embed.WithImageUrl("https://images-na.ssl-images-amazon.com/images/I/512OOMv4ZEL.jpg");
             embed.WithFooter("THX 4 HELP <3");
             embed.WithColor(255, 0, 255);
@@ -280,9 +281,9 @@ namespace Bugger.Modules
         public async Task Invite()
         {
             var embed = new EmbedBuilder();
-            embed.WithAuthor("Proszę, ale nie myśl sobie, że teraz będę się Cię słuchał!");
-            embed.WithTitle(":scream::sunglasses::kiss: LINK :scream::sunglasses::kiss:");
-            //embed.WithUrl();
+            embed.WithAuthor("Ale nie myśl sobie, że Twój serwer, to Ty tu żądzisz!");
+            embed.WithTitle(":scream::sunglasses::kiss: LINK :kiss::sunglasses::scream:");
+            embed.WithUrl(BotSettings.config.Invite);
 
             await Context.Channel.SendMessageAsync("", embed: embed.Build());
         }

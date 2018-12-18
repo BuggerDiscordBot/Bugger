@@ -28,7 +28,8 @@ namespace Bugger.Configuration
                 config = new BotConfig()
                 {
                     Prefix = "$",
-                    Token = "TWÓJ-TOKEN"
+                    Invite = "INVITE-LINK",
+                    Token = "TOKEN"
                 };
                 dataStorage.StoreObject(config, configFile, useIndentations: true);
             }

@@ -17,11 +17,11 @@ namespace Bugger.Features.Onboarding.Tasks
             
             if(defaultChannel is null)
             {
-                await logger.Log(LogSeverity.Error, "Onboarding > HelloWorldTask", $"Default channel of a new guild ({guild.Name}) is null.");
+                await logger.Log(LogSeverity.Error, "Onboarding > HelloWorldTask", $"Serwer ({guild.Name}) nie ma domyœlnego kana³u.");
                 return;
             }
             
-            await defaultChannel.SendMessageAsync(":wave: Hello, everyone! I'm Miunie and I'll be here to reply to your human commands. You can use the `help` command to see what I can do.");
+            await defaultChannel.SendMessageAsync("Siemka! Jestem **Bugger** :punch::boom: najlepszy polskojêzyczny bot discordowy :exclamation: _(bo jedyny xd)_ Nie chcê siê chwialiæ czy coœ, ale oprócz przedstawienia siê potrafiê te¿ np. reagowaæ na ludzkie komendy! Jeœli tylko bêdziecie gotowi oznaczcie mnie i napiszcie `pomoc` Mi³ej zabawy!");
         }
     }
 }

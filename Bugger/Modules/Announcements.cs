@@ -63,7 +63,7 @@ namespace Bugger.Modules
             {
                 messages.RemoveAt(NumerWiadomości - 1);
                 guildAcc.Modify(g => g.SetWelcomeMessages(messages));
-                response =  $"Usunąłem wiadomość numer #{NumerWiadomości} z wiadomości powitalnych!";
+                response =  $"Usunąłem wiadomość numer **#{NumerWiadomości}** z wiadomości powitalnych!";
             }
             await ReplyAsync(response);
         }
@@ -117,7 +117,7 @@ namespace Bugger.Modules
             {
                 messages.RemoveAt(NumerWiadomości - 1);
                 guildAcc.Modify(g => g.SetLeaveMessages(messages));
-                response =  $"Usunąłem #{NumerWiadomości} jako wiadomość powitalną!";
+                response =  $"Usunąłem wiadomość numer **#{NumerWiadomości}** z wiadomości pożegnalnych!";
             }
             await ReplyAsync(response);
         }

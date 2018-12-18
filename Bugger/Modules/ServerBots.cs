@@ -168,9 +168,9 @@ namespace Bugger.Modules
             guildAccount.Modify(g => g.SetBotData(data.GetGuild(id)));
         }
 
-        [Command("add")]
+        [Command("dodaj")]
         [Alias("add")]
-        [Remarks("Dodam link zaproszeniowy z botem do kolejki botów z której administratorzy będą mogli zweryfikować Twoją proźbę. Skł: `<p>bot dodaj <IdClientaBota> <NazwaBota> \"|\" <Opis>\n")]
+        [Remarks("Dodam link zaproszeniowy z botem do kolejki botów z której administratorzy będą mogli zweryfikować Twoją proźbę.\nSkł: `<p>bot dodaj <IdClientaBota> <NazwaBota> \"|\" <Opis>`")]
         [RequireOwner]
         public async Task AddBot(params string[] argumenty)
         {
@@ -224,8 +224,9 @@ namespace Bugger.Modules
             }
         }
 
-        [Command("list")]
+        [Command("lista")]
         [Alias("list")]
+        [Remarks("Wyświetlę zarządzalną listę botów tego serwera!")]
         [RequireOwner]
         public async Task ViewBots(params string[] argumenty)
         {
@@ -280,9 +281,9 @@ namespace Bugger.Modules
                             int index = i + (SUBMISSIONS_PER_PAGE * (page - 1));
 
                             if (index < list.Count)
-                            builder.Description += $"{index + 1}. [{list[index].name}]({LINK_TEMPLATE_FIRST + list[index].botId + LINK_TEMPLATE_LAST})" +
-                                $"przez **{Context.Client.GetUser(list[index].userId).Username}**:\n{list[index].description}\n" +
-                                $"*Client ID: {list[index].botId}*\n{list[index].timeSent} {TimeZone.CurrentTimeZone.StandardName}\n\n";
+                                builder.Description += $"{index + 1}. [{list[index].name}]({LINK_TEMPLATE_FIRST + list[index].botId + LINK_TEMPLATE_LAST})" +
+                                    $"przez **{Context.Client.GetUser(list[index].userId).Username}**:\n{list[index].description}\n" +
+                                    $"*Client ID: {list[index].botId}*\n{list[index].timeSent} {TimeZone.CurrentTimeZone.StandardName}\n\n";
                         }
                         catch (IndexOutOfRangeException)
                         {
@@ -303,8 +304,9 @@ namespace Bugger.Modules
             }
         }
 
-        [Command("usuń"), RequireUserPermission(GuildPermission.ManageGuild)]
+        [Command("Usuń"), RequireUserPermission(GuildPermission.ManageGuild)]
         [Alias("Remove")]
+        [Remarks("Usunę linka zaproszeniowego Twojego bota!")]
         [RequireOwner]
         public async Task RemoveBot(params string[] argumenty)
         {
@@ -358,7 +360,7 @@ namespace Bugger.Modules
 
         [Command("Archiwizuj"), RequireUserPermission(GuildPermission.ManageGuild)]
         [Alias("archive")]
-        [Remarks("Użycie: bots archive <BotId>")]
+        [Remarks("Zarchiwizuję link zaproszeniowy Twojego bota!\nUżycie: `bot archiwizuj <IdBota>`")]
         [RequireOwner]
         public async Task ArchiveBot(params string[] args)
         {

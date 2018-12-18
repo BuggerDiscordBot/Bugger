@@ -26,7 +26,7 @@ namespace Bugger.Modules
                 "Ilość moich funkcji ___**niszczy**___ nawet ~~finansowane pełne projekty botów~~, a jestem darmowy :poop::information_desk_person:\n" +
                 "Jak chcesz mnie zobaczyć w praktyce możesz napisać np.: `<prefix>kickme`\n" +
                 "**GL HF** Paaa <333");
-            embed.WithFooter("Napisali mnie połączeni w imię wiecznej przyjaźni: Amie & Dodek");
+            embed.WithFooter("Napisali mnie połączeni w imię wiecznej przyjaźni: Amie & Dodek... i ZottelvonUrvieh");
             embed.WithColor(0, 255, 0);
 
             await Context.Channel.SendMessageAsync("", embed: embed.Build());
@@ -235,13 +235,14 @@ namespace Bugger.Modules
         [Remarks("Wywale Cię stąd, zanim to zrobi ktoś mądry!")]
         public async Task KickMe()
         {
-            Discord.WebSocket.SocketGuildUser Użytkownik = Context.Guild.GetUser(Context.User.Id);
-
-            await Użytkownik.KickAsync();
+            Random r;
+            r = new Random();
+            int numer = r.Next(80, 100);
+            await ReplyAsync("No ej... nie zobaczyłeś jeszcze wszystkich moich możliwości! Do użycia zostało Ci: " + numer + " komend. Użyj ich wszystkich, a obiecuję, że dostaniesz swoją nagrodę" );
         }
 
         [Command("?"), Alias("ping")]
-        [Remarks("Zareaguję, jeśli wszystko ze mną ok...")]
+        [Remarks("Zareaguję, jeśli żyję")]
         public async Task What()
         {
             var msg = await Context.Channel.SendMessageAsync("?");
